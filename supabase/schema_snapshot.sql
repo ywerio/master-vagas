@@ -504,6 +504,10 @@ $function$
 
 
 -- Triggers
+
+-- Supabase Auth hook: create a profile row when a new Auth user is registered.
+-- auth.users is managed by Supabase and must already exist in the target project.
+CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION private.handle_new_user();
 CREATE TRIGGER guard_application_cpf_consent BEFORE UPDATE ON applications FOR EACH ROW EXECUTE FUNCTION private.guard_application_cpf_consent();
 CREATE TRIGGER guard_candidate_interview_response BEFORE UPDATE ON interview_invitations FOR EACH ROW EXECUTE FUNCTION private.guard_candidate_interview_response();
 CREATE TRIGGER guard_company_verification BEFORE UPDATE ON companies FOR EACH ROW EXECUTE FUNCTION private.guard_company_verification();
